@@ -1,0 +1,5 @@
+# use only absolute path !
+camera:
+    fsuser:    "hexim"
+    fsgroup:   "hexim"
+

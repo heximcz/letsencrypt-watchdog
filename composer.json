@@ -1,11 +1,15 @@
 {
     "require": {
-        "symfony/Console": "^2.7"
-    },
+        "symfony/Console": "^2.7",
+        "symfony/filesystem": "^2.7",
+        "symfony/finder": "^2.7",
+        "symfony/yaml": "^2.7"
+        },
 
     "autoload": {
         "psr-4": {
-             "App\\Console\\": "app/Console/"
+             "App\\Console\\": "app/Console/",
+             "App\\Config\\": "app/Config/"
         }
     }
 }
