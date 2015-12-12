@@ -3,6 +3,7 @@ namespace App\Config;
 
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
+use Exception;
 
 class GetYAMLConfig {
 	
@@ -42,6 +43,8 @@ class GetYAMLConfig {
 			        $this->config = $defconf;
 			    }
     		}
+    		else
+    		    throw new Exception( get_class($this) . ' FATAL ERROR: config.default.yml no exist!');
     	} catch ( ParseException $e ) {
 			printf( "Unable to create config array: %s \n", $e->getMessage() );
 			die();

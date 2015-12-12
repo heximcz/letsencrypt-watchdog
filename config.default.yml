@@ -1,9 +1,10 @@
 # use only absolute path !
 basic:
     # where is letsencryp-auto script installed
-    script: "/opt/letsencrypt/"
+    script:   "/opt/letsencrypt/"
     # directory path where are names of domains names like directory, containing certificates
     domains:  "/etc/letsencrypt/live/"
-
+    # admin email for any warns and errors
+    ademail:  "name@domain.com"
 
 

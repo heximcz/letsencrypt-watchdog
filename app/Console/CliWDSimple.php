@@ -48,13 +48,15 @@ class CliWDSimple extends Command
     {
     	$action = $input->getOption('action');
         switch ($action) {
-        	/*
-        	 * Zobrazi cestu k poslednimu nalezenemu obrazku
-        	 * */
+            // RENEW Certificate/s
             case 'renew':
             	
             	break;
-            	
+            // REVOKE Certificate/s
+            case 'renew':
+   
+            	break;
+            	     
             default:
                 echo 'Nothing to do.';
                 break;
