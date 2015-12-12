@@ -1,9 +1,9 @@
 {
     "require": {
-        "symfony/Console": "^2.7",
-        "symfony/filesystem": "^2.7",
-        "symfony/finder": "^2.7",
-        "symfony/yaml": "^2.7"
+        "symfony/Console": "^3.0",
+        "symfony/filesystem": "^3.0",
+        "symfony/finder": "^3.0",
+        "symfony/yaml": "^3.0"
         },
 
     "autoload": {
