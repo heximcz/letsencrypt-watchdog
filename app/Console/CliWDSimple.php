@@ -19,21 +19,22 @@ class CliWDSimple extends Command
 		parent::__construct();
 		$myConfig = new GetYAMLConfig();
 		$this->config = $myConfig->getConfigData();
-		print_r($this->config);
-		exit;
+//		print_r($this->config);
+//		exit;
 	}
 	
     protected function configure()
     {
         $this
         ->setName('wd:peace')
-        ->setDescription('Let\'s Encrypt WatchDog - Simple renew certs based on check of certificate expire value.')
-        ->addArgument(
-                'action',
-                InputArgument::REQUIRED,
-                'renew -> renew certificate'.PHP_EOL.
-                'revoke -> revoke certificate'
-        		)
+        ->setDescription('Simple renew/revoke based on check of certificate expire value.')
+        ->addOption(
+        		'action',
+        		'a',
+        		InputOption::VALUE_REQUIRED,
+        		'renew / revoke certificate',
+        		'renew'
+                 )
         ->addOption(
         		'domain',
         		'd',
@@ -45,7 +46,7 @@ class CliWDSimple extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	$action = $input->getArgument('action');
+    	$action = $input->getOption('action');
         switch ($action) {
         	/*
         	 * Zobrazi cestu k poslednimu nalezenemu obrazku
