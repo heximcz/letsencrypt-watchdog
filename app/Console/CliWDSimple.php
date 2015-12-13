@@ -8,25 +8,23 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use App\Config\GetYAMLConfig;
+use Src\Watchdog\WatchdogSimple;
 
 class CliWDSimple extends Command
 {
 
 	private $config;
 	
-	public function __construct()
+	public function __construct($config)
 	{
 		parent::__construct();
-		$myConfig = new GetYAMLConfig();
-		$this->config = $myConfig->getConfigData();
-//		print_r($this->config);
-//		exit;
+		$this->config = $config;
 	}
 	
     protected function configure()
     {
         $this
-        ->setName('wd:peace')
+        ->setName('wd:simple')
         ->setDescription('Simple renew/revoke based on check of certificate expire value.')
         ->addOption(
         		'action',
@@ -50,15 +48,26 @@ class CliWDSimple extends Command
         switch ($action) {
             // RENEW Certificate/s
             case 'renew':
-            	
+            	$renew = new WatchdogSimple($this->config);
+            	if ($input->getOption('domain') == "all") {
+            		
+            	}
+            	else {
+            		
+            	}
             	break;
             // REVOKE Certificate/s
-            case 'renew':
-   
+            case 'revoke':
+            	$revoke = new WatchdogSimple($this->config);
+                if ($input->getOption('domain') == "all") {
+            		
+            	}
+            	else {
+            		
+            	}
             	break;
-            	     
             default:
-                echo 'Nothing to do.';
+                echo '?? Nothing to do.'.PHP_EOL;
                 break;
         }
     }
