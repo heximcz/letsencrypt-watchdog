@@ -12,6 +12,8 @@ return array(
     'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Src\\Watchdog\\' => array($baseDir . '/src/Watchdog'),
+    'Src\\LetsEncrypt\\' => array($baseDir . '/src/LetsEncrypt'),
+    'Src\\Checks\\' => array($baseDir . '/src/Checks'),
     'App\\Console\\' => array($baseDir . '/app/Console'),
     'App\\Config\\' => array($baseDir . '/app/Config'),
 );

@@ -1,5 +1,5 @@
 # use only absolute path !
-basic:
+system:
     # where is letsencryp-auto script installed
     script:   "/opt/letsencrypt/"
     # directory path where are names of domains names like directory, containing certificates

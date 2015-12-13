@@ -3,11 +3,11 @@
 namespace App\Console;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+//use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use App\Config\GetYAMLConfig;
+//use App\Config\GetYAMLConfig;
 use Src\Watchdog\WatchdogSimple;
 
 class CliWDSimple extends Command
@@ -50,15 +50,15 @@ class CliWDSimple extends Command
             case 'renew':
             	$renew = new WatchdogSimple($this->config);
             	if ($input->getOption('domain') == "all") {
-            		
+            		$renew->renewAllDomain();
             	}
             	else {
-            		
+            		$renew->renewAllDomain();
             	}
             	break;
             // REVOKE Certificate/s
             case 'revoke':
-            	$revoke = new WatchdogSimple($this->config);
+            	//$revoke = new WatchdogSimple($this->config);
                 if ($input->getOption('domain') == "all") {
             		
             	}
