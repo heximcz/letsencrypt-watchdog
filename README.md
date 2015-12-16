@@ -3,7 +3,7 @@
 
 ## Overview
 
-Let's Encrypt watchdog is simply guard your domain certificate. If certificate expire during 24 hours, this script renew it.
+Let's Encrypt Watchdog is simply a guard for your domain certificate. If your certificate will expire within 24 hours, this script will renew it.
 
 ## Current State
 
