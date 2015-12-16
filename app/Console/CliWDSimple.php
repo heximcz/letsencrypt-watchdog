@@ -46,25 +46,19 @@ class CliWDSimple extends Command
     {
     	$action = $input->getOption('action');
         switch ($action) {
-            // RENEW Certificate/s
+            // RENEW Certificate/s if expire during 24 hour
             case 'renew':
             	$renew = new WatchdogSimple($this->config);
             	if ($input->getOption('domain') == "all") {
             		$renew->renewAllDomain();
             	}
             	else {
-            		$renew->renewAllDomain();
+            		echo "Only ALL in this time, sory.".PHP_EOL;
             	}
             	break;
             // REVOKE Certificate/s
             case 'revoke':
-            	//$revoke = new WatchdogSimple($this->config);
-                if ($input->getOption('domain') == "all") {
-            		
-            	}
-            	else {
-            		
-            	}
+               	echo "Only renew in this time, sory.".PHP_EOL;
             	break;
             default:
                 echo '?? Nothing to do.'.PHP_EOL;

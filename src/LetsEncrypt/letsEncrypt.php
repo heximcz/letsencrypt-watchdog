@@ -20,8 +20,6 @@ class letsEncrypt implements ILetsEncrypt {
 	public function renewDomain($input)
 	{
 		$this->wsStop();
-		echo $this->wsStatus();
-		echo "renewDomain ".$input.PHP_EOL;
 		echo shell_exec( $this->config['system']['le-script'] . DIRECTORY_SEPARATOR . 
 				"letsencrypt-auto certonly --standalone --renew-by-default -d " . $input . " -d www." . $input );
 		$this->wsStart();
@@ -35,8 +33,6 @@ class letsEncrypt implements ILetsEncrypt {
 	public function renewSubDomain($input)
 	{
 		$this->wsStop();
-		echo $this->wsStatus();
-		echo "renewSubDomain ".$input.PHP_EOL;
 		echo shell_exec( $this->config['system']['le-script'] . DIRECTORY_SEPARATOR .
 				"letsencrypt-auto certonly --standalone --renew-by-default -d " . $input );
 		$this->wsStart();
@@ -58,11 +54,7 @@ class letsEncrypt implements ILetsEncrypt {
 	 */
 	public function revokeSubDomain($input)
 	{
-		$this->wsStop();
-		echo $this->wsStatus();
 		echo "No work in this time: revokeSubDomain ".$input.PHP_EOL;
-		$this->wsStart();
-		echo $this->wsStatus();
 	}
 	
 	private function wsStop() {
