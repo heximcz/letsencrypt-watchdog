@@ -24,6 +24,9 @@ first functionality is fully tested on debian like system with Let's Encrypt Pub
 print help:
 
 ```php ./lets-watchdog.php```
+
+or
+
 ```php ./lets-watchdog.php wd:simple -h```
 
 check all and renew certificate who will be expired during 24 hours:
