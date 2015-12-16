@@ -22,7 +22,9 @@ first functionality is full tested
 ## Example Usage
 
 print help
+
 ```php ./lets-watchdog.php```
 
 check all and renew certificate who will be expired during 24 hours 
+
 ```php ./lets-watchdog.php wd:simple```
