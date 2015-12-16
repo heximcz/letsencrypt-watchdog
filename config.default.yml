@@ -1,10 +1,14 @@
 # use only absolute path !
 system:
+    # command for stop/start/status of your webservice (apache2, nginx, etc.)
+    ws-stop:  "/etc/init.d/nginx stop"
+    ws-start: "/etc/init.d/nginx start"
+    ws-status: "/etc/init.d/nginx status"
     # where is letsencryp-auto script installed
-    script:   "/opt/letsencrypt/"
+    le-script:   "/opt/letsencrypt/"
     # directory path where are names of domains names like directory, containing certificates
-    domains:  "/etc/letsencrypt/live/"
+    le-domains:  "/etc/letsencrypt/live/"
     # admin email for any warns and errors
-    ademail:  "name@domain.com"
+    admin-email:  "name@domain.com"
 
 

@@ -17,32 +17,51 @@ class WatchdogSimple implements IWatchdog {
 	}
 
 	/**
-	 * Simple renewAllDomain
-	 * @namespace Src\Watchdog
+	 * Simple renew All Domains
+	 *
+     * @see \Src\Watchdog\IWatchdog::renewAllDomain()
 	 * @return sum of all renewed certificates, 0 or x
 	 */
 	public function renewAllDomain() {
+		return $this->simpleAction('renew');
+	}
+	
+	/**
+	 *
+	 * Simple revoke All Domains
+	 *
+	 * @see \Src\Watchdog\IWatchdog::revokeAllDomain()
+	 * @return sum of all revoked certificates, 0 or x
+	 */
+	public function revokeAllDomain() {
+		return $this->simpleAction('revoke');
+	}
+	
+	private function simpleAction($action = 'renew') {
 		$fs = new Filesystem();
-		if (! $fs->exists($this->config['system']['domains']) ) {
+		if (! $fs->exists($this->config['system']['le-domains']) ) {
 			throw new Exception( 
-					"FATAL ERROR: Directory " . $this->config['system']['domains'] . " not exist. Is Let's Encrypt installed ?");
+					"FATAL ERROR: Directory " . $this->config['system']['le-domains'] . " not exist. Is Let's Encrypt installed ?");
 		}
 		$check = new domainCheck();
 		$finder = new Finder();
 		$certCheck = new certsCheck();
-		$le = new letsEncrypt();
+		$le = new letsEncrypt($this->config);
 		$counter = 0;
-		$finder->directories()->in( $this->config['system']['domains'] );
+		$finder->directories()->in( $this->config['system']['le-domains'] );
 		foreach ($finder as $file) {
    			if ($certCheck->isCertExpire($file->getRealpath())) {
-// 				echo $file->getRealpath()." Expire".PHP_EOL;
    		  		if ( $check->isSubdomain( $file->getRelativePathname() ) ) {
-//   		   			echo $file->getRelativePathname()." isSubdomain".PHP_EOL;
-   		   			$le->renewSubDomain($file->getRelativePathname());
+					if ($action == 'renew')
+	   		   			$le->renewSubDomain($file->getRelativePathname());
+					elseif ($action == 'revoke')
+						$le->revokeSubDomain($file->getRelativePathname());
    		  		}
    				else {
-   		   			$le->renewDomain($file->getRelativePathname());
-//   					echo $file->getRelativePathname()." isDomain".PHP_EOL;
+					if ($action == 'renew')
+   						$le->renewDomain($file->getRelativePathname());
+					elseif ($action == 'revoke')
+						$le->revokeDomain($file->getRelativePathname());
     			}
     		$counter++;
    			}
@@ -50,14 +69,5 @@ class WatchdogSimple implements IWatchdog {
 		return $counter;
 	}
 	
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see \Src\Watchdog\IWatchdog::revokeAllDomain()
-	 * @return sum of all revoked certificates, 0 or x
-	 */
-	public function revokeAllDomain() {
-		// TODO: Auto-generated method stub
-	}
+	
 }
