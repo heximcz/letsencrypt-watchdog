@@ -8,7 +8,7 @@ Let's Encrypt watchdog is simply guard your domain certificate. If certificate e
 ## Current State
 
 version 0.0.1
-first functionality is full tested
+first functionality is fully tested on debian like system with Let's Encrypt Public Beta
 
 ## How Install Let's Watchdog
 
@@ -21,10 +21,17 @@ first functionality is full tested
 
 ## Example Usage
 
-print help
+print help:
 
 ```php ./lets-watchdog.php```
+```php ./lets-watchdog.php wd:simple -h```
 
-check all and renew certificate who will be expired during 24 hours 
+check all and renew certificate who will be expired during 24 hours:
 
 ```php ./lets-watchdog.php wd:simple```
+
+### Using via crontab
+
+add this line to your /etc/crontab:
+
+```0 0  * * *   root /usr/local/sbin/php /opt/letsencrypt-watchdog/lets-watchdog.php wd:simple >> /var/log/le-watchdog/lewatchdog.log```
