@@ -17,6 +17,7 @@ first functionality is fully tested on debian like system with Let's Encrypt Pub
  - ```git clone https://github.com/heximcz/letsencrypt-watchdog.git```
  - ```cd /opt/letsencrypt-watchdog/```
  - ```cp ./config.default.yml ./config.yml```
+ - ```mkdir -p /var/log/le-watchdog/```
  - change your preferences in the config.yml file
 
 ## Example Usage
