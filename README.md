@@ -12,7 +12,7 @@ first functionality is full tested
 
 ## How Install Let's Watchdog
 
- - ssh to your DNS server
+ - Connet via SSH to your web server
  - ```cd /opt/```
  - ```git clone https://github.com/heximcz/letsencrypt-watchdog.git```
  - ```cd /opt/letsencrypt-watchdog/```
