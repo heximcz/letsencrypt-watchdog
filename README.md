@@ -10,6 +10,12 @@ Let's Encrypt Watchdog is simply a guard for your domain certificate. If your ce
 version 0.0.1
 first functionality is fully tested on debian like system with Let's Encrypt Public Beta
 
+## Prerequisites
+
+openssl
+
+php > 5.6.x (with enable shell_exec function in php.ini)
+
 ## How Install Let's Watchdog
 
  - Connet via SSH to your web server
