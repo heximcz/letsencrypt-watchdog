@@ -4,15 +4,29 @@ namespace Src\Watchdog;
 interface IWatchdog {
 
 	/**
-	 * Renew all domain in list
+	 * Renew all certificates in list
 	 * @return sum of all renewed certificates, 0 or x
 	 */
 	public function renewAllDomain();
 	
 	/**
-	 * Revoke all domain in list
+	 * Revoke all certificates in list
 	 * @return sum of all revoked certificates, 0 or x
 	 */
 	public function revokeAllDomain();
+	
+	/**
+	 * Renew one certificate
+	 * @param name of $domain
+	 * @return none
+	 */
+	public function renewOneDomain($domain);
+	
+	/**
+	 * Revoke one certificate
+	 * @param name of $domain
+	 * @return none
+	 */
+	public function revokeOneDomain($domain);
 	
 }

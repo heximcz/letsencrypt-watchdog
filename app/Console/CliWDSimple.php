@@ -42,27 +42,33 @@ class CliWDSimple extends Command
                  );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-    	$action = $input->getOption('action');
-        switch ($action) {
-            // RENEW Certificate/s if expire during 24 hour
-            case 'renew':
-            	$renew = new WatchdogSimple($this->config);
-            	if ($input->getOption('domain') == "all") {
-            		$renew->renewAllDomain();
-            	}
-            	else {
-            		echo "Only ALL in this time, sory.".PHP_EOL;
-            	}
-            	break;
-            // REVOKE Certificate/s
-            case 'revoke':
-               	echo "Only renew in this time, sory.".PHP_EOL;
-            	break;
-            default:
-                echo '?? Nothing to do.'.PHP_EOL;
-                break;
-        }
-    }
+    protected function execute(InputInterface $input, OutputInterface $output) {
+		$action = $input->getOption ( 'action' );
+		$wd = new WatchdogSimple ( $this->config );
+		switch ($action) {
+			// RENEW Certificate/s if expire during 24 hour
+			case 'renew' :
+				if ($input->getOption ( 'domain' ) == "all") {
+					if ($x = $wd->renewAllDomain () > 0)
+						echo PHP_EOL . "Renew: " . $x . " certificate/s." . PHP_EOL;
+				} 
+				else {
+					$wd->renewOneDomain ( $input->getOption ( 'domain' ) );
+				}
+				break;
+			// REVOKE Certificate/s
+			case 'revoke' :
+				if ($input->getOption ( 'domain' ) == "all") {
+					if ($x = $wd->revokeAllDomain () > 0)
+						echo PHP_EOL . "Revoke: " . $x . " certificate/s." . PHP_EOL;
+				}
+				else {
+					$wd->revokeOneDomain( $input->getOption ( 'domain' ) );
+				}
+				break;
+			default :
+				echo '?? Nothing to do.' . PHP_EOL;
+				break;
+		}
+	}
 }

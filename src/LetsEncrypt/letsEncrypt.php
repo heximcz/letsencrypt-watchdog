@@ -15,7 +15,7 @@ class letsEncrypt implements ILetsEncrypt {
 	/**
 	 * 
 	 * @param $input - domain name
-	 * @return boolean
+	 * @return text
 	 */
 	public function renewDomain($input)
 	{
@@ -28,7 +28,7 @@ class letsEncrypt implements ILetsEncrypt {
 	/**
 	 *
 	 * @param $input - domain name
-	 * @return boolean
+	 * @return text
 	 */
 	public function renewSubDomain($input)
 	{
@@ -41,20 +41,16 @@ class letsEncrypt implements ILetsEncrypt {
 	/**
 	 *
 	 * @param $input - domain name
-	 * @return boolean
+	 * @return text
 	 */
 	public function revokeDomain($input)
 	{
-		echo "No work in this time: revokeDomain ".$input.PHP_EOL;
-	}
-	/**
-	 *
-	 * @param $input - domain name
-	 * @return boolean
-	 */
-	public function revokeSubDomain($input)
-	{
-		echo "No work in this time: revokeSubDomain ".$input.PHP_EOL;
+		$this->wsStop();
+		echo shell_exec( $this->config['system']['le-script'] . DIRECTORY_SEPARATOR .
+				"letsencrypt-auto certonly revoke --cert-path " . $this->config['system']['le-domains'] . DIRECTORY_SEPARATOR .
+				$input . DIRECTORY_SEPARATOR . "fullchain.pem" );
+		$this->wsStart();
+		echo $this->wsStatus();
 	}
 	
 	private function wsStop() {
