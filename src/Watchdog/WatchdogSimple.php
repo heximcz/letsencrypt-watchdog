@@ -62,9 +62,9 @@ class WatchdogSimple implements IWatchdog {
 	public function revokeOneDomain($domain) {
 		$this->simpleActionOne('revoke', $domain);
 	}
-	
+
 	private function simpleAction($action = 'renew') {
-		if ( $this->checkLetsEncrypt () ) {
+		if ($this->checkLetsEncrypt ()) {
 			$check = new domainCheck ();
 			$finder = new Finder ();
 			$certCheck = new certsCheck ();
@@ -72,52 +72,47 @@ class WatchdogSimple implements IWatchdog {
 			$counter = 0;
 			$finder->directories ()->in ( $this->config ['system'] ['le-domains'] );
 			foreach ( $finder as $file ) {
-				if ($certCheck->isCertExpire ( $file->getRealpath () )) {
-					if ($check->isSubdomain ( $file->getRelativePathname () )) {
-						if ($action == 'renew')
+				if ($action == 'renew') {
+					if ($certCheck->isCertExpire ( $file->getRealpath () )) {
+						if ($check->isSubdomain ( $file->getRelativePathname () )) {
 							$le->renewSubDomain ( $file->getRelativePathname () );
-						elseif ($action == 'revoke')
-							$le->revokeDomain ( $file->getRelativePathname () );
-					} 
-					else {
-						if ($action == 'renew')
+						} 
+						else {
 							$le->renewDomain ( $file->getRelativePathname () );
-						elseif ($action == 'revoke')
-							$le->revokeDomain ( $file->getRelativePathname () );
+						}
+						$counter ++;
 					}
+				} 
+				elseif ($action == "revoke") {
+					$le->revokeDomain ( $file->getRelativePathname () );
 					$counter ++;
 				}
 			}
 			return $counter;
 		}
-
 	}
 	
 	private function simpleActionOne($action, $domain) {
-		if ( $this->checkLetsEncrypt () ) {
+		if ($this->checkLetsEncrypt ()) {
 			$check = new domainCheck ();
 			$le = new letsEncrypt ( $this->config );
-			if ($this->fs->exists($this->config['system']['le-domains'] . DIRECTORY_SEPARATOR . $domain)) {
-				if ($check->isSubdomain ( $domain )) {
-					if ($action == 'renew')
+			if ($this->fs->exists ( $this->config ['system'] ['le-domains'] . DIRECTORY_SEPARATOR . $domain )) {
+				if ($action == 'renew') {
+					if ($check->isSubdomain ( $domain )) {
 						$le->renewSubDomain ( $domain );
-					elseif ($action == 'revoke')
-						$le->revokeDomain ( $domain );
-				} 
-				else {
-					if ($action == 'renew')
+					}
+					else {
 						$le->renewDomain ( $domain );
-					elseif ($action == 'revoke')
-						$le->revokeDomain ( $domain );
+					}
+				} 
+				elseif ($action == 'revoke') {
+					$le->revokeDomain ( $domain );
 				}
-			}
+			} 
 			else {
-				throw new Exception(
-					"FATAL ERROR: Directory " . $this->config['system']['le-domains'] . DIRECTORY_SEPARATOR . $domain .
-					" not exist. Is Let's Encrypt installed ?");
+				throw new Exception ( "FATAL ERROR: Directory " . $this->config ['system'] ['le-domains'] . DIRECTORY_SEPARATOR . $domain . " not exist. Is Let's Encrypt installed ?" );
 			}
 		}
-		
 	}
 	
 	private function checkLetsEncrypt() {
