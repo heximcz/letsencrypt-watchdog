@@ -47,7 +47,7 @@ class letsEncrypt implements ILetsEncrypt {
 	{
 		$this->wsStop();
 		echo shell_exec( $this->config['system']['le-script'] . DIRECTORY_SEPARATOR .
-				"letsencrypt-auto certonly revoke --cert-path " . $this->config['system']['le-domains'] . DIRECTORY_SEPARATOR .
+				"letsencrypt-auto revoke --cert-path " . $this->config['system']['le-domains'] . DIRECTORY_SEPARATOR .
 				$input . DIRECTORY_SEPARATOR . "fullchain.pem" );
 		$this->wsStart();
 		echo $this->wsStatus();
