@@ -7,9 +7,10 @@ Let's Encrypt Watchdog is simply a guard for your domain certificate. If your ce
 
 ## Current State
 
-version 0.0.1
+Release 0.0.2
 
-first functionality is fully tested on debian like system with Let's Encrypt Public Beta
+new features: revoke/renew one or all certificates
+
 
 ## Prerequisites
 
