@@ -47,3 +47,9 @@ check all and renew certificate who will be expired during 24 hours:
 add this line to your /etc/crontab:
 
 ```0 0  * * *   root /usr/local/sbin/php /opt/letsencrypt-watchdog/lets-watchdog.php wd:simple >> /var/log/le-watchdog/lewatchdog.log```
+
+### Notice
+
+Limits in Let's Encrypt public beta you can see here:
+
+[Quick Start Guide](https://community.letsencrypt.org/t/quick-start-guide/1631)
