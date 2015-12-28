@@ -7,10 +7,9 @@ Let's Encrypt Watchdog is simply a guard for your domain certificate. If your ce
 
 ## Current State
 
-Release 0.0.2
+Release 0.0.3
 
-new features: revoke/renew one or all certificates
-
+new features: add new option --time, (renew certificate before expiration (in seconds), min=86400)
 
 ## Prerequisites
 
