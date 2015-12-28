@@ -1,0 +1,12 @@
+
+Release 0.0.3
+
+- new features: add new option --time, (renew certificate before expiration (in seconds), min=86400)
+
+Release 0.0.2
+
+- new features: revoke/renew one or all certificates
+
+Release 0.0.1
+
+- initial release
