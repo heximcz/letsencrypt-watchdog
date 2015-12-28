@@ -5,13 +5,13 @@ class certsCheck {
 
 	/**
 	 * 
-	 * @param $input - path to check certificate 
+	 * @param $path - path to check certificate 
+	 * @param $time - renew certificate before expiration (in seconds), min=86400
 	 * @return boolean
 	 */
-	public function isCertExpire($input)
+	public function isCertExpire($path, $time = 86400)
 	{
-		// echo shell_exec("openssl x509 -enddate -noout -in " . $input . "/fullchain.pem").PHP_EOL;
-		$output = trim(shell_exec("openssl x509 -checkend 86400 -noout -in " . $input . "/fullchain.pem ; echo $?"));
+		$output = trim(shell_exec("openssl x509 -checkend " . $time . " -noout -in " . $path . "/fullchain.pem ; echo $?"));
 		return $output;
 	}
 

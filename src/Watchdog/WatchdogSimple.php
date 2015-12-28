@@ -22,10 +22,11 @@ class WatchdogSimple implements IWatchdog {
 	 * Simple renew All Domains
 	 *
      * @see \Src\Watchdog\IWatchdog::renewAllDomain()
+	 * @param $time renew certificate before expiration (in seconds), min=86400
 	 * @return sum of all renewed certificates, 0 or x
 	 */
-	public function renewAllDomain() {
-		return $this->simpleAction('renew');
+	public function renewAllDomain($time = 86400) {
+		return $this->simpleAction('renew', $time);
 	}
 	
 	/**
@@ -44,11 +45,12 @@ class WatchdogSimple implements IWatchdog {
 	 * Simple renew only one certificate
 	 *
 	 * @see \Src\Watchdog\IWatchdog::renewOneDomain($domain)
-	 * @param name of $domain
+	 * @param $domain
+	 * @param $time renew certificate before expiration (in seconds), min=86400
 	 * @return none
 	 */
-	public function renewOneDomain($domain) {
-		$this->simpleActionOne('renew', $domain);
+	public function renewOneDomain($domain, $time = 86400) {
+		$this->simpleActionOne('renew', $domain, $time);
 	}
 
 	/**
@@ -63,7 +65,7 @@ class WatchdogSimple implements IWatchdog {
 		$this->simpleActionOne('revoke', $domain);
 	}
 
-	private function simpleAction($action = 'renew') {
+	private function simpleAction($action = 'renew', $time) {
 		if ($this->checkLetsEncrypt ()) {
 			$check = new domainCheck ();
 			$finder = new Finder ();
@@ -73,7 +75,7 @@ class WatchdogSimple implements IWatchdog {
 			$finder->directories ()->in ( $this->config ['system'] ['le-domains'] );
 			foreach ( $finder as $file ) {
 				if ($action == 'renew') {
-					if ($certCheck->isCertExpire ( $file->getRealpath () )) {
+					if ($certCheck->isCertExpire ( $file->getRealpath (), $time )) {
 						if ($check->isSubdomain ( $file->getRelativePathname () )) {
 							$le->renewSubDomain ( $file->getRelativePathname () );
 						} 
@@ -92,17 +94,20 @@ class WatchdogSimple implements IWatchdog {
 		}
 	}
 	
-	private function simpleActionOne($action, $domain) {
+	private function simpleActionOne($action, $domain, $time) {
 		if ($this->checkLetsEncrypt ()) {
 			$check = new domainCheck ();
+		    $certCheck = new certsCheck ();
 			$le = new letsEncrypt ( $this->config );
 			if ($this->fs->exists ( $this->config ['system'] ['le-domains'] . DIRECTORY_SEPARATOR . $domain )) {
 				if ($action == 'renew') {
-					if ($check->isSubdomain ( $domain )) {
-						$le->renewSubDomain ( $domain );
-					}
-					else {
-						$le->renewDomain ( $domain );
+					if ($certCheck->isCertExpire ( $this->config ['system'] ['le-domains'] . DIRECTORY_SEPARATOR . $domain, $time )) {
+						if ($check->isSubdomain ( $domain )) {
+							$le->renewSubDomain ( $domain );
+						}
+						else {
+							$le->renewDomain ( $domain );
+						}
 					}
 				} 
 				elseif ($action == 'revoke') {
@@ -110,7 +115,7 @@ class WatchdogSimple implements IWatchdog {
 				}
 			} 
 			else {
-				throw new Exception ( "FATAL ERROR: Directory " . $this->config ['system'] ['le-domains'] . DIRECTORY_SEPARATOR . $domain . " not exist. Is Let's Encrypt installed ?" );
+				throw new Exception ( "FATAL ERROR: Directory " . $this->config ['system'] ['le-domains'] . DIRECTORY_SEPARATOR . $domain . " not exist." );
 			}
 		}
 	}

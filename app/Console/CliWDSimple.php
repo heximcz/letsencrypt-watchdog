@@ -3,12 +3,11 @@
 namespace App\Console;
 
 use Symfony\Component\Console\Command\Command;
-//use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-//use App\Config\GetYAMLConfig;
 use Src\Watchdog\WatchdogSimple;
+use Exception;
 
 class CliWDSimple extends Command
 {
@@ -39,27 +38,38 @@ class CliWDSimple extends Command
         		InputOption::VALUE_REQUIRED,
         		'check all or one specific domain',
         		'all'
+                 )
+        ->addOption(
+        		'time',
+        		't',
+        		InputOption::VALUE_REQUIRED,
+        		'renew certificate before expiration (in seconds), min=86400',
+        		'86400'
                  );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
 		$action = $input->getOption ( 'action' );
+		if ( !is_numeric($input->getOption ( 'time' )) )
+			throw new Exception("FATAL ERROR: Input parametr time is not a number!");
+		if ( $input->getOption ( 'time' ) < 86400 )
+			throw new Exception("FATAL ERROR: Input parametr time is too small!");
 		$wd = new WatchdogSimple ( $this->config );
 		switch ($action) {
-			// RENEW Certificate/s if expire during 24 hour
+			// RENEW
 			case 'renew' :
-				if ($input->getOption ( 'domain' ) == "all") {
-					if ($x = $wd->renewAllDomain () > 0)
+				if ( $input->getOption ( 'domain' ) == "all" ) {
+					if ( $x = $wd->renewAllDomain ( $input->getOption ( 'time' ) ) > 0 )
 						echo PHP_EOL . "Renew: " . $x . " certificate/s." . PHP_EOL;
 				} 
 				else {
-					$wd->renewOneDomain ( $input->getOption ( 'domain' ) );
+					$wd->renewOneDomain ( $input->getOption ( 'domain' ), $input->getOption ( 'time' ) );
 				}
 				break;
-			// REVOKE Certificate/s
+			// REVOKE
 			case 'revoke' :
-				if ($input->getOption ( 'domain' ) == "all") {
-					if ($x = $wd->revokeAllDomain () > 0)
+				if ( $input->getOption ( 'domain' ) == "all" ) {
+					if ( $x = $wd->revokeAllDomain () > 0 )
 						echo PHP_EOL . "Revoke: " . $x . " certificate/s." . PHP_EOL;
 				}
 				else {
