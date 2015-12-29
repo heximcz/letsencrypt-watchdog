@@ -1,23 +1,26 @@
 [
     {
         "name": "symfony/polyfill-mbstring",
-        "version": "v1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "0b6a8940385311a24e060ec1fe35680e17c74497"
+            "reference": "49ff736bd5d41f45240cec77b44967d76e0c3d25"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0b6a8940385311a24e060ec1fe35680e17c74497",
-            "reference": "0b6a8940385311a24e060ec1fe35680e17c74497",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/49ff736bd5d41f45240cec77b44967d76e0c3d25",
+            "reference": "49ff736bd5d41f45240cec77b44967d76e0c3d25",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2015-11-04 20:28:58",
+        "suggest": {
+            "ext-mbstring": "For best performance"
+        },
+        "time": "2015-11-20 09:19:13",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -59,17 +62,17 @@
     },
     {
         "name": "symfony/console",
-        "version": "v3.0.0",
-        "version_normalized": "3.0.0.0",
+        "version": "v3.0.1",
+        "version_normalized": "3.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
-            "reference": "175871ca8d1ef16ff8d8cac395a1c73afa8d0e63"
+            "reference": "ebcdc507829df915f4ca23067bd59ee4ef61f6c3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/175871ca8d1ef16ff8d8cac395a1c73afa8d0e63",
-            "reference": "175871ca8d1ef16ff8d8cac395a1c73afa8d0e63",
+            "url": "https://api.github.com/repos/symfony/console/zipball/ebcdc507829df915f4ca23067bd59ee4ef61f6c3",
+            "reference": "ebcdc507829df915f4ca23067bd59ee4ef61f6c3",
             "shasum": ""
         },
         "require": {
@@ -86,7 +89,7 @@
             "symfony/event-dispatcher": "",
             "symfony/process": ""
         },
-        "time": "2015-11-30 12:36:17",
+        "time": "2015-12-22 10:39:06",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -121,23 +124,23 @@
     },
     {
         "name": "symfony/filesystem",
-        "version": "v3.0.0",
-        "version_normalized": "3.0.0.0",
+        "version": "v3.0.1",
+        "version_normalized": "3.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/filesystem.git",
-            "reference": "692d98d813e4ef314b9c22775c86ddbeb0f44884"
+            "reference": "c2e59d11dccd135dc8f00ee97f34fe1de842e70c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/filesystem/zipball/692d98d813e4ef314b9c22775c86ddbeb0f44884",
-            "reference": "692d98d813e4ef314b9c22775c86ddbeb0f44884",
+            "url": "https://api.github.com/repos/symfony/filesystem/zipball/c2e59d11dccd135dc8f00ee97f34fe1de842e70c",
+            "reference": "c2e59d11dccd135dc8f00ee97f34fe1de842e70c",
             "shasum": ""
         },
         "require": {
             "php": ">=5.5.9"
         },
-        "time": "2015-11-23 10:41:47",
+        "time": "2015-12-22 10:39:06",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -172,23 +175,23 @@
     },
     {
         "name": "symfony/finder",
-        "version": "v3.0.0",
-        "version_normalized": "3.0.0.0",
+        "version": "v3.0.1",
+        "version_normalized": "3.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/finder.git",
-            "reference": "3577eb98dba90721d1a0a3edfc6956ab8b1aecee"
+            "reference": "8617895eb798b6bdb338321ce19453dc113e5675"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/3577eb98dba90721d1a0a3edfc6956ab8b1aecee",
-            "reference": "3577eb98dba90721d1a0a3edfc6956ab8b1aecee",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/8617895eb798b6bdb338321ce19453dc113e5675",
+            "reference": "8617895eb798b6bdb338321ce19453dc113e5675",
             "shasum": ""
         },
         "require": {
             "php": ">=5.5.9"
         },
-        "time": "2015-10-30 23:35:59",
+        "time": "2015-12-05 11:13:14",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -223,23 +226,23 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v3.0.0",
-        "version_normalized": "3.0.0.0",
+        "version": "v3.0.1",
+        "version_normalized": "3.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
-            "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002"
+            "reference": "3df409958a646dad2bc5046c3fb671ee24a1a691"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
-            "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/3df409958a646dad2bc5046c3fb671ee24a1a691",
+            "reference": "3df409958a646dad2bc5046c3fb671ee24a1a691",
             "shasum": ""
         },
         "require": {
             "php": ">=5.5.9"
         },
-        "time": "2015-11-30 12:36:17",
+        "time": "2015-12-26 13:39:53",
         "type": "library",
         "extra": {
             "branch-alias": {
