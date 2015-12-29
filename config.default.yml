@@ -4,7 +4,7 @@ system:
     ws-stop:  "/etc/init.d/nginx stop"
     ws-start: "/etc/init.d/nginx start"
     ws-status: "/etc/init.d/nginx status"
-    # where is letsencryp-auto script installed
+    # where is letsencrypt-auto script installed
     le-script:   "/opt/letsencrypt/"
     # directory path where are names of domains names like directory, containing certificates
     le-domains:  "/etc/letsencrypt/live/"
