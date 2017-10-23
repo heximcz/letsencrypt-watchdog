@@ -1,4 +1,4 @@
-# deprecated, end of developmen
+# deprecated, end of development
 
 
 
